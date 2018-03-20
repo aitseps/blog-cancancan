@@ -4,13 +4,21 @@ class CommentsController < ApplicationController
 		@comment = Comment.new(content:params[:comment][:content], user: current_user)
 		@post.comments << @comment
 		@comment.save
-		redirect_to @post
 	end
 
 	def destroy
 		@post = Post.find(params[:post_id])
 		@comment = Comment.find(params[:id])
 		@comment.destroy
-		redirect_to @post
+	end
+
+	def edit
+		@post = Post.find(params[:post_id])
+		@comment = Comment.find(params[:id])
+	end
+
+	def update
+		@comment = Comment.find(params[:id])
+		@comment.update(content: params[:comment][:content])
 	end
 end
