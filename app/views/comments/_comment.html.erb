@@ -3,6 +3,7 @@
   <br>
   <%= @comment.content %>
   <div class="text-right">
+    <%= link_to "Editar", edit_post_comment_path(@post, @comment), data:{remote: true}, class: "btn btn-success btn-xs" %>
     <%= link_to 'Eliminar', post_comment_path(@post,@comment), method: :delete, data: { confirm: 'Estás seguro que deseas eliminar el Comentario?', remote: true }, class: 'btn btn-xs btn-danger' %>
   </div>
 </div>

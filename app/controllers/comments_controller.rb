@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
+	load_and_authorize_resource
 	def create
 		@post = Post.find(params[:post_id])
-		@comment = Comment.new(content:params[:comment][:content], user: current_user)
+		@comment.user = current_user
 		@post.comments << @comment
 		@comment.save
 	end
@@ -20,5 +21,10 @@ class CommentsController < ApplicationController
 	def update
 		@comment = Comment.find(params[:id])
 		@comment.update(content: params[:comment][:content])
+	end
+
+	private
+	def comment_params
+		params.require(:comment).permit(:content)
 	end
 end
